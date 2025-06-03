@@ -1,0 +1,28 @@
+# Arquivos do Rust/Cargo
+/target/
+**/*.rs.bk
+
+# Arquivos de build gerados por ferramentas
+Cargo.lock
+!Cargo.lock    # mantenha se for um binário, remova se for uma biblioteca
+
+# Arquivos de log e debug
+*.log
+*.tmp
+
+# Arquivos de editor/IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ferramentas de cobertura e testes
+/coverage/
+/grcov/
+/tarpaulin-report.html
+*.profraw
