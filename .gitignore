@@ -26,3 +26,6 @@ Thumbs.db
 /grcov/
 /tarpaulin-report.html
 *.profraw
+
+# Variáveis de ambiente
+.env
