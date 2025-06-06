@@ -99,29 +99,27 @@ impl User {
 
         // Calcular o OFFSET com base na página atual
         let offset = (page - 1) * items_per_page;
-
-        // Consulta SQL para buscar os usuários da página atual
-        let query = "
-            SELECT id, name, email
-            FROM seguranca.usuarios
-            ORDER BY id
-            LIMIT $1 OFFSET $2
-        ";
-        let rows = client.query(query, &[&items_per_page, &offset]).await?;
+        let rows = client
+            .query(
+                "SELECT id, nome, email FROM seguranca.usuarios ORDER BY id LIMIT $1 OFFSET $2",
+                &[&items_per_page, &offset],
+            )
+            .await?;
 
         // Mapear as linhas para a estrutura `User`
         let users: Vec<User> = rows
             .iter()
             .map(|row| User {
                 id: row.get("id"),
-                name: row.get("name"),
+                name: row.get("nome"),
                 email: row.get("email"),
             })
             .collect();
 
         // Consulta SQL para contar o número total de usuários
-        let total_items_query = "SELECT COUNT(*) FROM seguranca.usuarios";
-        let total_items_row = client.query_one(total_items_query, &[]).await?;
+        let total_items_row = client
+            .query_one("SELECT COUNT(*) FROM seguranca.usuarios", &[])
+            .await?;
         let total_items: i64 = total_items_row.get(0);
 
         // Calcular o número total de páginas

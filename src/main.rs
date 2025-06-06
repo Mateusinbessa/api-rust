@@ -7,7 +7,6 @@ use actix_web::{App, HttpServer, web};
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let pool = database::db::create_pool().await;
-
     println!("Servidor rodando em http://localhost:8080");
 
     HttpServer::new(move || {
